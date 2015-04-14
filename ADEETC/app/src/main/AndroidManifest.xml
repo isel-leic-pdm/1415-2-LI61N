@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider android:authorities="pt.isel.pdm.adeetc.provider"
+            android:name=".provider.ADEETCProvider"/>
     </application>
 
 </manifest>

@@ -99,21 +99,7 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
     }
 
     public void onTest1(View view) {
-        final ContentResolver resolver = getContentResolver();
-        new Thread() {
-            public void run() {
-                ContentValues values;
-
-                values = createValues(1754, "João Trindade", "jtrindade@cc.isel.ipl.pt");
-                resolver.insert(ADEETCContract.Lecturers.CONTENT_URI, values);
-
-                values = createValues(1234, "Carlos Guedes", "cguedes@cc.isel.ipl.pt");
-                resolver.insert(ADEETCContract.Lecturers.CONTENT_URI, values);
-
-                values = createValues(1369, "Paulo Pereira", "palbp@cc.isel.ipl.pt");
-                resolver.insert(ADEETCContract.Lecturers.CONTENT_URI, values);
-            }
-        }.start();
+        TestProviderService.startActionTest1(this);
     }
 
     public void onTest2(View view) {
@@ -121,19 +107,6 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
     }
 
     public void onClear(View view) {
-        final ContentResolver resolver = getContentResolver();
-        new Thread() {
-            public void run() {
-                resolver.delete(ADEETCContract.Lecturers.CONTENT_URI, null, null);
-            }
-        }.start();
-    }
-
-    ContentValues createValues(int code, String name, String email) {
-        ContentValues values = new ContentValues();
-        values.put(ADEETCContract.Lecturers.CODE, code);
-        values.put(ADEETCContract.Lecturers.NAME, name);
-        values.put(ADEETCContract.Lecturers.EMAIL, email);
-        return values;
+        TestProviderService.startActionClear(this);
     }
 }

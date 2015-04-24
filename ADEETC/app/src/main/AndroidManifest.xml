@@ -19,12 +19,19 @@
 
         <provider
             android:name=".provider.ADEETCProvider"
-            android:authorities="pt.isel.pdm.adeetc.provider" />
+            android:authorities="pt.isel.pdm.adeetc.provider"
+            android:exported="false" />
 
         <service
             android:name=".TestProviderService"
             android:exported="false" >
         </service>
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
     </application>
 
 </manifest>

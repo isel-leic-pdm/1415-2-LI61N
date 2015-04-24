@@ -1,11 +1,15 @@
 package pt.isel.pdm.adeetc;
 
+import android.app.AlarmManager;
 import android.app.LoaderManager;
+import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,6 +27,8 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
 
     private ListView listView;
     private SimpleCursorAdapter adapter;
+
+    private AlarmManager alarmManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,16 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
         listView.setAdapter(adapter);
 
         getLoaderManager().initLoader(LECTURERS_LOADER, null, this);
+
+        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pi = PendingIntent.getBroadcast(
+                this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.setInexactRepeating(
+                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + 20*1000, 20*1000,
+                pi);
     }
 
 

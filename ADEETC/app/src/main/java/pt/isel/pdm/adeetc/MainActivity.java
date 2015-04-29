@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import pt.isel.pdm.adeetc.provider.ADEETCContract;
 
@@ -49,19 +50,31 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
                         android.R.id.text2
                 },
                 0);
+
+        adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                TextView textView = (TextView)view;
+                int position = cursor.getPosition();
+                String text = cursor.getString(columnIndex);
+                textView.setText(
+                        String.format(
+                                "[P:%d|C:%d] %s",
+                                position,
+                                columnIndex,
+                                text));
+                if (text.contains("Barros")) {
+                    textView.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                }
+                return true;
+            }
+        });
+
         listView.setAdapter(adapter);
 
         getLoaderManager().initLoader(LECTURERS_LOADER, null, this);
 
-        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pi = PendingIntent.getBroadcast(
-                this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarmManager.setInexactRepeating(
-                AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + 20*1000, 20*1000,
-                pi);
     }
 
 
@@ -119,10 +132,23 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
     }
 
     public void onTest2(View view) {
+        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pi = PendingIntent.getBroadcast(
+                this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        alarmManager.setInexactRepeating(
+                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + 12*1000, 12*1000,
+                pi);
     }
 
     public void onClear(View view) {
         TestProviderService.startActionClear(this);
+
+        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pi = PendingIntent.getBroadcast(
+                this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.cancel(pi);
     }
 }

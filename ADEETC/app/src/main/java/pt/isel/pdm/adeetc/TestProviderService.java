@@ -85,10 +85,25 @@ public class TestProviderService extends IntentService {
         values = createValues(1754, "João Trindade", "jtrindade@cc.isel.ipl.pt");
         resolver.insert(ADEETCContract.Lecturers.CONTENT_URI, values);
 
-        values = createValues(1234, "Carlos Guedes", "cguedes@cc.isel.ipl.pt");
+        values = createValues(1647, "Carlos Guedes", "cguedes@cc.isel.ipl.pt");
+        resolver.insert(ADEETCContract.Lecturers.CONTENT_URI, values);
+
+        values = createValues(1111, "António Barros", "abarros@cc.isel.ipl.pt");
+        resolver.insert(ADEETCContract.Lecturers.CONTENT_URI, values);
+
+        values = createValues(2222, "Manuel Lopes", "mlopes@cc.isel.ipl.pt");
+        resolver.insert(ADEETCContract.Lecturers.CONTENT_URI, values);
+
+        values = createValues(3333, "Joaquim Henriques", "jhenriques@cc.isel.ipl.pt");
         resolver.insert(ADEETCContract.Lecturers.CONTENT_URI, values);
 
         values = createValues(1369, "Paulo Pereira", "palbp@cc.isel.ipl.pt");
+        resolver.insert(ADEETCContract.Lecturers.CONTENT_URI, values);
+
+        values = createValues(8888, "Pedro Santos", "psantos@cc.isel.ipl.pt");
+        resolver.insert(ADEETCContract.Lecturers.CONTENT_URI, values);
+
+        values = createValues(9999, "José Silva", "jsilva@cc.isel.ipl.pt");
         resolver.insert(ADEETCContract.Lecturers.CONTENT_URI, values);
 
     }

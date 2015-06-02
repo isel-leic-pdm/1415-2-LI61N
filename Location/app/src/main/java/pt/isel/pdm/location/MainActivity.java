@@ -3,6 +3,9 @@ package pt.isel.pdm.location;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +18,21 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity  implements LocationListener {
 
+    private Handler handler;
+
+    private Runnable wifiUpdater = new Runnable() {
+        @Override
+        public void run() {
+            WifiInfo info = wifiman.getConnectionInfo();
+            String txt = "BSSID: ";
+            if (info != null) {
+                txt += info.getBSSID();
+            }
+            txtBSSID.setText(txt);
+            handler.postDelayed(wifiUpdater, 5000);
+        }
+    };
+
     private Button butStart;
     private Button butStop;
 
@@ -23,11 +41,14 @@ public class MainActivity extends ActionBarActivity  implements LocationListener
     private TextView txtMessage;
 
     private LocationManager locman;
+    private WifiManager wifiman;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        handler      = new Handler();
 
         butStart     = (Button)   findViewById(R.id.butStart);
         butStop      = (Button)   findViewById(R.id.butStop);
@@ -37,6 +58,9 @@ public class MainActivity extends ActionBarActivity  implements LocationListener
         txtMessage   = (TextView) findViewById(R.id.txtMessage);
 
         locman       = (LocationManager) getSystemService(LOCATION_SERVICE);
+        wifiman      = (WifiManager)     getSystemService(WIFI_SERVICE);
+
+        handler.postDelayed(wifiUpdater, 5000);
     }
 
     @Override

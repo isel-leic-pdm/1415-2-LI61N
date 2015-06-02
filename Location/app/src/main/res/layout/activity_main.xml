@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/butStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Start"
+        android:onClick="onStartLocating" />
+
+    <Button
+        android:id="@+id/butStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Stop"
+        android:onClick="onStopLocating" />
+
+    <TextView
+        android:id="@+id/txtBSSID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/butStart"
+        android:layout_below="@+id/butStart"
+        android:layout_marginTop="10dp"
+        android:text="BSSID: " />
+
+    <TextView
+        android:id="@+id/txtProviders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/butStart"
+        android:layout_below="@+id/txtBSSID"
+        android:layout_marginTop="10dp"
+        android:text="Providers: " />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@+id/butStart"
+        android:layout_below="@+id/txtProviders"
+        android:layout_marginTop="10dp" >
+        <TextView
+            android:id="@+id/txtMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:text="" />
+    </ScrollView>
+
+</RelativeLayout>

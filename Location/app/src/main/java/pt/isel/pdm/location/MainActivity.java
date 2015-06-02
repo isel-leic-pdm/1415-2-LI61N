@@ -1,7 +1,11 @@
 package pt.isel.pdm.location;
 
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,7 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity  implements LocationListener {
 
     private Button butStart;
     private Button butStop;
@@ -17,6 +21,8 @@ public class MainActivity extends ActionBarActivity {
     private TextView txtBSSID;
     private TextView txtProviders;
     private TextView txtMessage;
+
+    private LocationManager locman;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,7 @@ public class MainActivity extends ActionBarActivity {
         txtProviders = (TextView) findViewById(R.id.txtProviders);
         txtMessage   = (TextView) findViewById(R.id.txtMessage);
 
+        locman       = (LocationManager) getSystemService(LOCATION_SERVICE);
     }
 
     @Override
@@ -55,10 +62,49 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onStartLocating(View view) {
-
+        String providers = "Providers:   ";
+        for (String provider : locman.getProviders(true)) {
+            providers += provider + "   ";
+            Log.i("pdm/location", "Using provider: " + provider);
+            locman.requestLocationUpdates(provider, 5000, 0, this);
+        }
+        txtProviders.setText(providers);
     }
 
     public void onStopLocating(View view) {
-        
+        locman.removeUpdates(this);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        String provider  = location.getProvider();
+        long   timestamp = location.getTime();
+        double latitude  = location.getLatitude();
+        double longitude = location.getLongitude();
+        float  accuracy  = location.getAccuracy();
+
+        String message = provider +
+                "\n    Timestamp: " + timestamp +
+                "\n    Accuracy: " + accuracy +
+                "\n    Latitude: " + latitude +
+                "\n    Longitude: " + longitude +
+                "\n------------\n";
+
+        txtMessage.setText(message + txtMessage.getText());
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 }

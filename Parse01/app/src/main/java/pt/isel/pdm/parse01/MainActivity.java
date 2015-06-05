@@ -2,24 +2,32 @@ package pt.isel.pdm.parse01;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private EditText edtText;
+    private ParseObject obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ParseObject testObject = new ParseObject("PDMObject");
-        testObject.put("section", "li61n");
-        testObject.saveInBackground();
-    }
+        edtText = (EditText) findViewById(R.id.edtWord);
 
+        onRefresh(null);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,5 +49,33 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onSave(View view) {
+        if (obj == null) {
+            obj = new ParseObject("TagLine");
+        }
+
+        String tag = edtText.getText().toString();
+
+        obj.put("tag", tag);
+        obj.saveInBackground();
+    }
+
+    public void onRefresh(View view) {
+        ParseQuery<ParseObject> objQuery =
+            ParseQuery.getQuery("TagLine");
+
+        objQuery.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e != null) {
+                    Log.d("pdm/parse", "parse.com: getFirst failed");
+                } else {
+                    obj = object;
+                    edtText.setText(obj.getString("tag"));
+                }
+            }
+        });
     }
 }

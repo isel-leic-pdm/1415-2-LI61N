@@ -25,10 +25,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
 
-    public void doSignUp(View view) {
+    public void doSignUpOrIn(View view) {
         Log.i("pdm/nullauth", "sign[up|in] activity doSignUp");
         final String username = edtUsername.getText().toString().trim();
         final String password = edtPassword.getText().toString();
-
+        finish();
     }
 }

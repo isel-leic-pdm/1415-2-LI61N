@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">NullAuthUse</string>
+
+    <string name="lblToken">Token</string>
+    <string name="butGetAuth">Get</string>
+    <string name="butCleanup">Cleanup</string>
+    <string name="butInvalidate">Invalidate</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

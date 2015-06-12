@@ -12,6 +12,9 @@ import android.util.Log;
 
 public class NullAuthenticator extends AbstractAccountAuthenticator {
 
+    public static final String FAKE_AUTH_TOKEN = "fake.token.for.";
+    public static final String GENERAL_SCOPE = "general";
+
     private final Context mContext;
 
     public NullAuthenticator(Context context) {

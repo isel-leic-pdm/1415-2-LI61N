@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<account-authenticator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accountType="pt.isel.pdm.nullauth"
+    android:icon="@mipmap/null_eye"
+    android:smallIcon="@mipmap/null_eye"
+    android:label="@string/auth_label" />

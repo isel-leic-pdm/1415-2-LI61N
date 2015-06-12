@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NullAuthenticator</string>
+    <string name="auth_label">Null Auth</string>
+</resources>

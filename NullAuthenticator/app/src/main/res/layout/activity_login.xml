@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="pt.isel.pdm.nullauthenticator.LoginActivity">
+
+    <TextView
+        android:id="@+id/lblUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Username" />
+
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblUsername"
+        android:layout_below="@+id/lblUsername"
+        android:ems="10" >
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/lblPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edtUsername"
+        android:layout_below="@+id/edtUsername"
+        android:layout_marginTop="14dp"
+        android:text="Password" />
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblPassword"
+        android:layout_alignRight="@+id/edtUsername"
+        android:layout_below="@+id/lblPassword"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/butLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblNoAccount"
+        android:layout_alignRight="@+id/lblNoAccount"
+        android:layout_below="@+id/edtPassword"
+        android:layout_marginTop="18dp"
+        android:background="@android:color/holo_green_light"
+        android:text="SIGN IN"
+        android:onClick="doSignUpOrIn" />
+
+    <TextView
+        android:id="@+id/lblNoAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/butLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Don&apos;t have an account yet?"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/butSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIGN UP"
+        android:onClick="doSignUpOrIn"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/lblNoAccount" />
+
+</RelativeLayout>

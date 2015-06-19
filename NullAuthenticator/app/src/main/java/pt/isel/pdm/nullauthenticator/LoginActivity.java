@@ -6,12 +6,9 @@ import android.accounts.AccountManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -93,7 +90,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
 
         // Store the authentication token.
-        accman.setAuthToken(account, NullAuthenticator.GENERAL_SCOPE, authToken);
+        accman.setAuthToken(account, NullAuthenticator.NULL_GENERAL_SCOPE, authToken);
 
         Bundle resultBundle = new Bundle();
         resultBundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType);
